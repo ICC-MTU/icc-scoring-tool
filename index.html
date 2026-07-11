@@ -150,8 +150,56 @@ footer{
   font-family:var(--mono);border-top:1px solid var(--border);margin-top:8px
 }
 </style>
+<script src="https://accounts.google.com/gsi/client" async defer></script>
+<style>
+#auth-overlay{
+  position:fixed;inset:0;background:var(--navy);z-index:9999;
+  display:flex;align-items:center;justify-content:center;flex-direction:column;gap:20px
+}
+.auth-card{
+  background:var(--card);border:1px solid var(--border);border-radius:16px;
+  padding:40px 48px;text-align:center;max-width:400px;width:90%
+}
+.auth-logo{
+  width:56px;height:56px;background:var(--accent);border-radius:12px;
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--mono);font-weight:600;font-size:18px;color:#fff;
+  margin:0 auto 20px
+}
+.auth-title{font-size:18px;font-weight:600;margin-bottom:6px}
+.auth-sub{font-size:13px;color:var(--muted);margin-bottom:28px;line-height:1.6}
+.auth-error{
+  display:none;margin-top:16px;padding:10px 14px;
+  background:#fff0f0;border:1px solid #fcd;border-radius:8px;
+  font-size:13px;color:var(--red)
+}
+</style>
 </head>
 <body>
+<div id="auth-overlay">
+  <div class="auth-card">
+    <div class="auth-logo">ICC</div>
+    <div class="auth-title">Grant Success Predictor</div>
+    <div class="auth-sub">Sign in with your MTU Google account to access this tool.</div>
+    <div id="g_id_onload"
+      data-client_id="98161399244-12eh5ng9qgi1hb9v1eppja1cjj4o6u6u.apps.googleusercontent.com"
+      data-callback="handleCredentialResponse"
+      data-auto_prompt="true">
+    </div>
+    <div class="g_id_signin"
+      data-type="standard"
+      data-size="large"
+      data-theme="outline"
+      data-text="sign_in_with"
+      data-shape="rectangular"
+      data-logo_alignment="left">
+    </div>
+    <div class="auth-error" id="auth-error">
+      Access restricted to MTU (@mtu.edu) accounts only.
+    </div>
+  </div>
+</div>
+
 
 <header>
   <div class="header-logo">ICC</div>
@@ -553,7 +601,20 @@ function renderResult(prob, breakdown, fundingRaw) {
     </div>`;
 }
 
-loadData();
+
+function handleCredentialResponse(response) {
+  // Decode JWT to get email
+  const payload = JSON.parse(atob(response.credential.split('.')[1]));
+  const email   = payload.email || '';
+  if (email.endsWith('@mtu.edu')) {
+    document.getElementById('auth-overlay').style.display = 'none';
+    loadData(); // load the tool only after successful auth
+  } else {
+    document.getElementById('auth-error').style.display = 'block';
+  }
+}
+
+// loadData() called after MTU auth
 </script>
 </body>
 </html>
