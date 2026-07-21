@@ -254,8 +254,49 @@ footer{
 
         <!-- Sponsor -->
         <div class="field">
-          <label>Sponsor <em>— type agency name</em></label>
-          <input type="text" id="sponsor-input" placeholder="e.g. NSF, NIH, DOD, ORAU, AHA…" oninput="updateSponsorGroup()">
+          <label>Sponsor <em>— select or type your own</em></label>
+          <input type="text" id="sponsor-input" placeholder="e.g. NSF, NIH, DOD, ORAU, AHA…"
+            list="sponsor-list" oninput="updateSponsorGroup()" autocomplete="off">
+          <datalist id="sponsor-list">
+            <option value="NSF">
+            <option value="NIH">
+            <option value="DOD">
+            <option value="DOE">
+            <option value="NASA">
+            <option value="DARPA">
+            <option value="ONR">
+            <option value="ARPA-H">
+            <option value="ARPA-E">
+            <option value="ORAU">
+            <option value="NIST">
+            <option value="USDOT">
+            <option value="MDOT">
+            <option value="USDHHS/NIH">
+            <option value="USDHHS/CDC/NIOSH">
+            <option value="AHA">
+            <option value="MTU VPR">
+            <option value="MTU: ICC-GLRC">
+            <option value="GLRC-ICC/MTU">
+            <option value="Superior Health Foundation">
+            <option value="Mozilla Foundation">
+            <option value="Spencer Foundation">
+            <option value="Biswas Family Foundation">
+            <option value="Saving Tiny Hearts Foundation">
+            <option value="Dana Foundation">
+            <option value="Amazon">
+            <option value="Amazon AWS">
+            <option value="Google">
+            <option value="Microsoft">
+            <option value="Samsung">
+            <option value="Sony">
+            <option value="Cisco">
+            <option value="PSERC">
+            <option value="PSERC-AZSU">
+            <option value="IEEE">
+            <option value="ARM">
+            <option value="FAA">
+            <option value="MEDC">
+          </datalist>
           <div class="hint group" id="sponsor-badge" style="display:none"></div>
         </div>
 
@@ -551,7 +592,7 @@ function calculateScore() {
     { label: `Department (${dept})`,         val: contrib(`Department_${dept}`) },
     { label: `Duration (${duration} yr)`,    val: contrib('Duration (years)') },
     { label: `Amount ($${(amount/1000).toFixed(0)}K)`, val: contrib('log_amount') },
-    { label: 'Year trend',                   val: contrib('Fiscal Year Submitted') },
+    { label: 'Fiscal Year',                   val: contrib('Fiscal Year Submitted') },
   ].filter(f => Math.abs(f.val) > 0.005)
    .sort((a,b) => Math.abs(b.val)-Math.abs(a.val));
 
