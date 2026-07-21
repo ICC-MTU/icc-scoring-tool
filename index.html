@@ -256,7 +256,7 @@ footer{
         <div class="field">
           <label>Sponsor <em>— select or type your own</em></label>
           <input type="text" id="sponsor-input" placeholder="e.g. NSF, NIH, DOD, ORAU, AHA…"
-            list="sponsor-list" oninput="updateSponsorGroup()" autocomplete="off">
+            list="sponsor-list" oninput="updateSponsorGroup()" onchange="normalizeSponsor()" autocomplete="off">
           <datalist id="sponsor-list">
             <option value="NSF">
             <option value="NIH">
@@ -488,6 +488,25 @@ function groupFunding(f) {
   return 'Other';
 }
 
+
+function normalizeSponsor() {
+  const input = document.getElementById('sponsor-input');
+  const typed = input.value.trim();
+  if (!typed) return;
+
+  // Find matching datalist option (case-insensitive)
+  const options = document.querySelectorAll('#sponsor-list option');
+  for (const opt of options) {
+    if (opt.value.toLowerCase() === typed.toLowerCase()) {
+      input.value = opt.value; // normalize to correct casing
+      updateSponsorGroup();    // re-run detection with normalized value
+      return;
+    }
+  }
+  // No exact match — keep what user typed, just re-run detection
+  updateSponsorGroup();
+}
+
 function updateSponsorGroup() {
   const val   = document.getElementById('sponsor-input').value;
   const group = groupSponsor(val);
@@ -511,7 +530,7 @@ function updateSponsorGroup() {
     const autoFunding = fundingMap[group];
     if (autoFunding) {
       const sel = document.getElementById('funding-select');
-      if (!sel.value) sel.value = autoFunding; // only auto-fill if not already set
+      sel.value = autoFunding; // always update funding type when sponsor changes
     }
   } else {
     badge.style.display = 'none';
