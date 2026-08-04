@@ -149,6 +149,29 @@ footer{
   text-align:center;padding:28px 24px;font-size:12px;color:#bbb;
   font-family:var(--mono);border-top:1px solid var(--border);margin-top:8px
 }
+
+.contact-card{
+  max-width:1080px;margin:0 auto 24px;padding:0 24px;
+  display:grid;grid-template-columns:1fr 1fr;gap:16px
+}
+@media(max-width:740px){.contact-card{grid-template-columns:1fr}}
+.contact-box{
+  background:var(--card);border:1px solid var(--border);border-radius:14px;
+  padding:20px 24px;display:flex;gap:16px;align-items:flex-start
+}
+.contact-icon{
+  width:40px;height:40px;border-radius:10px;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;font-size:18px
+}
+.contact-icon.blue{background:#e8f0ff}
+.contact-icon.teal{background:#e6faf6}
+.contact-label{font-size:11px;font-weight:600;text-transform:uppercase;
+  letter-spacing:0.4px;color:var(--muted);margin-bottom:4px}
+.contact-name{font-size:14px;font-weight:600;color:var(--text);margin-bottom:2px}
+.contact-detail{font-size:13px;color:var(--muted)}
+.contact-detail a{color:var(--accent);text-decoration:none}
+.contact-detail a:hover{text-decoration:underline}
+
 </style>
 <script src="https://accounts.google.com/gsi/client" async defer></script>
 <style>
@@ -173,6 +196,29 @@ footer{
   background:#fff0f0;border:1px solid #fcd;border-radius:8px;
   font-size:13px;color:var(--red)
 }
+
+.contact-card{
+  max-width:1080px;margin:0 auto 24px;padding:0 24px;
+  display:grid;grid-template-columns:1fr 1fr;gap:16px
+}
+@media(max-width:740px){.contact-card{grid-template-columns:1fr}}
+.contact-box{
+  background:var(--card);border:1px solid var(--border);border-radius:14px;
+  padding:20px 24px;display:flex;gap:16px;align-items:flex-start
+}
+.contact-icon{
+  width:40px;height:40px;border-radius:10px;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;font-size:18px
+}
+.contact-icon.blue{background:#e8f0ff}
+.contact-icon.teal{background:#e6faf6}
+.contact-label{font-size:11px;font-weight:600;text-transform:uppercase;
+  letter-spacing:0.4px;color:var(--muted);margin-bottom:4px}
+.contact-name{font-size:14px;font-weight:600;color:var(--text);margin-bottom:2px}
+.contact-detail{font-size:13px;color:var(--muted)}
+.contact-detail a{color:var(--accent);text-decoration:none}
+.contact-detail a:hover{text-decoration:underline}
+
 </style>
 </head>
 <body>
@@ -356,6 +402,28 @@ footer{
       </div>
     </div>
 
+  </div>
+</div>
+
+
+<div class="contact-card">
+  <div class="contact-box">
+    <div class="contact-icon blue">👨‍💻</div>
+    <div>
+      <div class="contact-label">Developer</div>
+      <div class="contact-name">Tagore Kosireddy</div>
+      <div class="contact-detail">Graduate Research Assistant, ICC</div>
+      <div class="contact-detail"><a href="mailto:trkosire@mtu.edu">trkosire@mtu.edu</a></div>
+    </div>
+  </div>
+  <div class="contact-box">
+    <div class="contact-icon teal">🏛️</div>
+    <div>
+      <div class="contact-label">Developed by</div>
+      <div class="contact-name">Institute of Computing and Cybersystems</div>
+      <div class="contact-detail">Michigan Technological University</div>
+      <div class="contact-detail"><a href="mailto:icc-intake@mtu.edu">icc-intake@mtu.edu</a></div>
+    </div>
   </div>
 </div>
 
